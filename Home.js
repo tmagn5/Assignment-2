@@ -1,52 +1,44 @@
 // Home.js
-import { View,Text,StyleSheet, TextInput } from "react-native";
+import { View,Text,StyleSheet, TextInput, Image, Button } from "react-native";
 import React, {useState} from 'react';
-const image = new Image();
-const url = 'https://fakestoreapi.com/'
-image.src = "./src/screens/shopping_bags_no_background.png";
-document.body.appendChild(image)
-// const fetchAPI = async (url) => {
-//     const data = await fetch(url)
-//     const res await data.json()
-//     const {url} = res.results
-//     console.log('https://fakestoreapi.com/')
-// }
-export default Home = function ({navigation}) {
+
+export default function Home ({navigation}) {
     function myfunction() {
         return ("Hello");
     }
     const navToHint = () => navigation.navigate('Hint')
+    const navToEmpty = () => navigation.navigate('Empty_cart')
+    const navToCart = () => navigation.navigate('Shopping_cart')
     return (
         <View style={styles.container}>
           <Text style={{fontSize: 80, color: 'blue'}}></Text>
           <Text> </Text>
-          <Text> </Text>
-          <Text> </Text>
-          <img src="./src/screens/shopping_bags_no_background.png" width="100"></img>
-          <Text> </Text>
-          <Text> </Text>
+          <Image source={require('../../assets/shopping_bags_no_background.png')} style = {{height: 100, width: 100, objectFit: 'contain'}}></Image>
           <Text> </Text>
           <Text> </Text>
           <Text style={{fontSize:40, fontStyle: "italic"}} >
            Welcome to Fake Store!
           </Text>
-          <Text></Text>
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
-          <Text style={{fontSize:20}} onPress={navToHint} borderWidth={50}>
-           Product Categories
-          </Text>
+          <Button title='Product Categories' onPress={navToHint}>Add To Cart</Button>
           <Text> </Text>
           <Text> </Text>
-          <img src="./src/screens/shopping_cart.png" width="100"></img>
+          <Image source={require('../../assets/shopping_cart.png')} style = {{height: 100, width: 100, objectFit: 'contain'}}></Image>
+          <Text> </Text>
+          <Button title='View Cart' onPress={navToEmpty}>Add To Cart</Button>
+          {/* <img src="./src/screens/shopping_cart.png" width="100"></img> */}
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
         </View>
+        // <View style={{ flexDirection:"row" }}>
+
+        // </View>
     )
 }
 const styles = StyleSheet.create({
