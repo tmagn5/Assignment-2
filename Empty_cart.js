@@ -1,25 +1,65 @@
 // Home.js
-import { View,Text,StyleSheet, TextInput, Button } from "react-native";
+import { View,Text,StyleSheet, TextInput, Button, Image, FlatList } from "react-native";
 import React, {useState} from 'react';
+// import { useSelector } from "react-redux";
+import { cartSelector } from "../redux/cartSlice";
+import { countSelector } from "../redux/cartSlice";
 function myfunction() {
     return ("Hello");
 }
 
 export default Electronics = function ({navigation}) {
+    // const cart = useSelector(cartSelector)
+    // const count = useSelector(countSelector)
+    // console.log(cart)
+
     const navToHome = () => navigation.navigate('Home')
     const navtoElec = () => navigation.navigate('Electronics')
     return (
         <View style={styles.container}>
           <Text style={{fontSize: 20, color: 'blue'}}>Shopping Cart</Text>
-          <Text> </Text>
-          <Text> </Text>
           <Text style={{fontSize:15}}>
-          Your cart is empty
+          {/* {count === 0 && 'Your cart is empty'} */}
           </Text>
-          <Text> </Text>
-          <Text> </Text>
-          <Text> </Text>
-          <Text> </Text>
+          <FlatList 
+              style={styles.list} 
+              // data={cart} 
+              keyExtractor={(item, index)=>`${item.id}${index}`}
+              renderItem={({item})=>{
+            return (
+              <View style={styles.listItem}>
+                <Text style={{fontSize:15}} onPress>
+                {item.title}</Text>
+                <Text>{item.id}</Text>
+                <Text>{item.price}</Text>
+                <Text>{item.description}</Text>
+                <Image
+                  style={styles.image}
+                  source={{
+                  uri: item?.image,
+                }}
+
+                />
+            </View>  
+            )
+          }} />
+          {/* {cart.map((prod) => {
+          return (
+            <>
+                <Text style={{fontSize:15}} onPress>
+                {prod.title}</Text>
+                <Text>{prod.id}</Text>
+                <Text>{prod.price}</Text>
+                <Text>{prod.description}</Text>
+                <Image
+        style={styles.image}
+        source={{
+          uri: prod?.image,
+        }}
+                />
+            </>  
+          )
+        })} */}
           <Text> </Text>
           <Text> </Text>
           <Text> </Text>
@@ -77,6 +117,18 @@ const styles = StyleSheet.create({
       padding: 8,
       margin: 10,
       width: 200,
+    },
+    image: {
+      height: 100,
+      width: 100,
+    },
+    list: {
+      flex: 1,
+      backgroundColor: 'blue',
+    },
+    listItem: {
+      backgroundColor: 'red',
+      padding: 10,
     }
     }
 )

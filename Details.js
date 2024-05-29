@@ -1,13 +1,15 @@
-import { Text, StyleSheet, Image, Button } from "react-native";
+import { Text, StyleSheet, Image, Button, View } from "react-native";
 import { useEffect, useState } from "react";
 import { fetch_products, fetch_categories, fetch_details } from "../service/api";
+// import { useDispatch } from "react-redux";
+// import { add_to_cart } from "../redux/cartSlice";
 
 // function myfunction() {
 //   navToEmpty;
 // }
 
-count = 0
 const Details = ({route, navigation}) => {
+    // const dispatch = useDispatch()
     const navToEmpty = () => navigation.navigate('Empty_cart')
     const navToCart = () => navigation.navigate('Shopping_cart')
     const navToHint = () => navigation.navigate('Hint')
@@ -27,7 +29,7 @@ const Details = ({route, navigation}) => {
     }, [id])
 
     return(
-      <>
+      <View style={styles.container}>
       <Text>
         {product?.title}
       </Text>
@@ -53,22 +55,49 @@ const Details = ({route, navigation}) => {
       <Text> </Text>
       <Text> </Text>
       <Text> </Text>
-      <Text> </Text>
-      <Text> </Text>
-      <Image source={require('../../assets/shopping_cart.png')} style = {{height: 100, width: 100, objectFit: 'contain'}}></Image>
-      <Text style={{fontSize:20}} onPress borderWidth={50}>
+              <View style = {styles.row}> 
+            <Button style={styles.button} title='Product Categories' onPress={navToHint}>Products</Button>
+            <View style={styles.button}>
+            <Image source={require('../../assets/shopping_cart.png')} style = {{height: 100, width: 100, objectFit: 'contain'}}></Image>
+            <Button title='View Cart' onPress={navToEmpty} >Add To Cart</Button>
+            </View>
+            <Text style={{fontSize:20}} onPress={() => dispatch(add_to_cart(product))} borderWidth={50}>
           Add to Cart
       </Text>
+          </View>
       <Text> </Text>
-      <Text style={{fontSize:20}} onPress={navToHint} borderWidth={50}>
+      <Text> </Text>
+      {/* <Image source={require('../../assets/shopping_cart.png')} style = {{height: 100, width: 100, objectFit: 'contain'}}></Image> */}
+      {/* <Text style={{fontSize:20}} onPress={() => dispatch(add_to_cart(product))} borderWidth={50}>
+          Add to Cart
+      </Text> */}
+      <Text> </Text>
+      {/* <Text style={{fontSize:20}} onPress={navToHint} borderWidth={50}>
           Products
-      </Text>
-      </>
+      </Text> */}
+      </View>
     )
 
 }
 
+const styles = StyleSheet.create({
+row: {
+  flexDirection: 'row',
+  alignItems: 'flex-end',
+},
+button: {
+  marginHorizontal: 10,
+  alignItems: 'center'
+},
+image: {
+  height:200, 
+  width:200, 
+  objectFit:'contain'
+  // button: {width: 100}
+}
+})
+
 export default Details
 
-const styles = StyleSheet.create({image: {height:200, width:200, objectFit:'contain'}})
+// const styles = StyleSheet.create({image: {height:200, width:200, objectFit:'contain'}})
   

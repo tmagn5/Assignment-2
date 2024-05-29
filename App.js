@@ -13,16 +13,22 @@ import Products from './src/screens/Products';
 import Details from './src/screens/Details';
 import Empty_cart from './src/screens/Empty_cart';
 import Shopping_cart from './src/screens/Shopping_cart';
-// import { Provider } from "react-redux";
-// import Counter from "./features/counter/Counter";
-
+import { Provider } from "react-redux";
+// import { Counter } from "./features/counter/Counter";
+import { store } from './src/redux/store';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 const Stack = createStackNavigator()
-const url = 'https://fakestoreapi.com/'
+
+const Tab = createBottomTabNavigator();
+
+//const Stack = createStackNavigator()
 
 export default function App() {
-  const [info,setInfo] = useState({})
+ const [info,setInfo] = useState({})
   return (
+ //   <Provider store={store}>
     <NavigationContainer>
+      {/* <Stack.Screen name="Hint" component={Hint}/> */}
       <Stack.Navigator initialRouteName="App">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Hint" component={Hint}/>
@@ -31,7 +37,17 @@ export default function App() {
         <Stack.Screen name="Empty_cart" component={Empty_cart}/>
         <Stack.Screen name="Shopping_cart" component={Shopping_cart}/>
       </Stack.Navigator>
+      {/* <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        }}>
+        
+        <Tab.Screen name="Products" component={Home} />
+        <Tab.Screen name="Empty_cart" component={Empty_cart} />
+      </Tab.Navigator> */}
     </NavigationContainer>
+ //   </Provider>
+
   );
   return (
     <View style={styles.container}>
